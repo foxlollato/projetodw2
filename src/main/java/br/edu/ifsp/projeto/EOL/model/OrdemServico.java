@@ -11,10 +11,12 @@ public class OrdemServico {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OneToMany
     private Usuario cliente;
 
     private Plano plano;
 
+    @OneToOne
     private Endereco endereco;
 
     private Usuario instalador;
