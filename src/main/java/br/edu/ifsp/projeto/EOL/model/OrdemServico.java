@@ -13,5 +13,41 @@ public class OrdemServico {
 
     private Usuario cliente;
 
+    private Plano plano;
+
+    private Endereco endereco;
+
     private Usuario instalador;
+
+    public Usuario getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Usuario cliente) {
+        this.cliente = cliente;
+    }
+
+    public Plano getPlano() {
+        return plano;
+    }
+
+    public void setPlano(Plano plano) {
+        this.plano = plano;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public Usuario getInstalador() {
+        return instalador;
+    }
+
+    public void setInstalador(Usuario instalador) {
+        this.instalador = instalador;
+    }
 }
