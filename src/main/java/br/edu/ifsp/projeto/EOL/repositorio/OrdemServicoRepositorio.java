@@ -39,7 +39,7 @@ public interface OrdemServicoRepositorio extends CrudRepository<OrdemServico, Lo
             "AND p.papel = 'ROLE_INSTALADOR'", nativeQuery = true)
     List<OrdemServico> findAllExpiredInstaller(Date dataAtual);
 
-    @Query(value="SELECT * FROM os where instalador is null", nativeQuery = true)
+    @Query(value="SELECT * FROM os where instalador_id is null", nativeQuery = true)
     List<OrdemServico> findAllOpen();
 
 

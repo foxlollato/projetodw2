@@ -6,11 +6,7 @@ public class DummyPasswordEncoder implements PasswordEncoder{
 
     @Override
     public String encode(CharSequence rawPassword) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = rawPassword.length() - 1; i >=0; i--) {
-            sb.append(rawPassword.charAt(i));
-        }
-        return sb.toString();
+    	return new StringBuilder(rawPassword).reverse().toString();
     }
 
     @Override

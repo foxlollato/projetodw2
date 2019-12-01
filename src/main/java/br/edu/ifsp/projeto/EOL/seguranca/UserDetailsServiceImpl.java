@@ -23,19 +23,19 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Usuario usuario = repo.findByUsername(username);
 
-        logger.debug("Usu√°rio: " + username);
+        logger.debug("Usu·rio: " + username);
 
         if (usuario == null) {
             throw new UsernameNotFoundException(
-                    "Username " + username + " n√£o encontrado.");
+                    "Username " + username + " n„o encontrado.");
         }
 
         if (usuario.getAuthorities().size() == 0) {
             throw new UsernameNotFoundException(
-                    "Username " + username + ": sem pap√©is (roles) cadastrados.");
+                    "Username " + username + ": sem papÈis (roles) cadastrados.");
         }
 
-        logger.debug(String.format("Usu√°rio: %s, senha: %s, roles: %d",
+        logger.debug(String.format("Usu·rio: %s, senha: %s, roles: %d",
                 usuario.getUsername(), usuario.getPassword(), usuario.getAuthorities().size()));
 
         return usuario;

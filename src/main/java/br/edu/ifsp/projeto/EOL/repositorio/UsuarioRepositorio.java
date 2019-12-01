@@ -10,6 +10,9 @@ public interface UsuarioRepositorio extends CrudRepository<Usuario, Long> {
 
     Usuario findByUsername(String username);
 
-    @Query("SELECT u FROM Usuario u JOIN u.papeis p WHERE p.papel = :role")
+    @Query(value="SELECT u.nome, p.papel FROM usuario u INNER JOIN papel p ON p.papel = :role", nativeQuery = true)
     List<Usuario> findAllByRole(String role);
+    
+    @Query(value="SELECT u.nome, p.papel FROM usuario u INNER JOIN papel p ON u.id = p.usuario_id", nativeQuery = true)
+    List<Usuario> findAll();
 }

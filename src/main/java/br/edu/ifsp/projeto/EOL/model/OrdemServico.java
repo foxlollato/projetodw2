@@ -12,7 +12,7 @@ public class OrdemServico {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
@@ -53,7 +53,6 @@ public class OrdemServico {
     public void setExecucao(Date execucao) {
         this.execucao = execucao;
     }
-
 
     public Usuario getCliente() {
         return cliente;

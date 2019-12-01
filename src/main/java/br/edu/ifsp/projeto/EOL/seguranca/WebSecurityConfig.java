@@ -20,8 +20,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .userDetailsService(userDetailsService);
+        auth.userDetailsService(userDetailsService);
     }
 
     @Bean
@@ -32,25 +31,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests()
-                .antMatchers("/relatorio", "/relatorio/**")
-                .hasAuthority("ROLE_ADMIN")
-                .antMatchers("/cadastraros")
-                .hasAuthority("ROLE_USER")
-                .antMatchers("/os", "/os/**", "/cadastroinstalador", "/cadastroinstalador/**")
-                .hasAuthority("ROLE_INSTALADOR")
-                .antMatchers("/", "/**")
-                .permitAll()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll()
-                .and()
-                .logout()
-                .permitAll()
-                .and()
-                .csrf().ignoringAntMatchers("/h2-console/**", "/api/**")
-                .and()
-                .headers().frameOptions().sameOrigin();
+            .authorizeRequests()
+            	.antMatchers("/relatorio", "/relatorio/**")
+            		.hasAuthority("ROLE_ADMIN")
+            	.antMatchers("/cadastraros")
+            		.hasAuthority("ROLE_USER")
+            	.antMatchers("/os", "/os/**")
+            		.hasAuthority("ROLE_INSTALADOR")
+            	.antMatchers("/", "/**", "/cadastrarcliente", "/cadastrarinstalador")
+            		.permitAll()
+            	.and()
+            .formLogin()
+	            .loginPage("/login")
+	            .permitAll()
+	            .and()
+            .logout()
+	            .permitAll()
+	            .and()
+            .csrf().ignoringAntMatchers("/h2-console/**", "/api/**")
+            	.and()
+            .headers().frameOptions().sameOrigin();
     }
 }
