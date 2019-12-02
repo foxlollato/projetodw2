@@ -12,7 +12,7 @@ public class OrdemServico {
     private static final long serialVersionUID = 1L;
 
     @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @ManyToOne
@@ -85,4 +85,9 @@ public class OrdemServico {
     public void setInstalador(Usuario instalador) {
         this.instalador = instalador;
     }
+    
+	@PrePersist
+	private void abertura() {
+		abertura = new Date();
+	}
 }

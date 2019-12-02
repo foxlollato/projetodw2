@@ -1,8 +1,12 @@
 package br.edu.ifsp.projeto.EOL.model;
 
-import org.springframework.security.core.GrantedAuthority;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-import javax.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
 
 @Entity
 @Table(name = "papeis")
@@ -10,13 +14,15 @@ public class Papel implements GrantedAuthority {
     private static final long serialVersionUID = 1L;
 
     @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String papel;
 
     @SuppressWarnings("unused")
-    private Papel() {}
+    public Papel() {
+    	
+    }
 
     public Papel(String papel) {
         this.papel = papel;
