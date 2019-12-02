@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+		<meta charset="UTF-8">
+		<title>EOL</title>
+		<style>
+			div#user-bar {
+				display: flex;
+				align-items: baseline;
+			}
+			
+			div#user-bar form {
+				margin-left: 1em;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Home</h1>
+		
+		<img th:src="@{/images/energia.jpg}">
+		
+		<ul>
+			<li><a th:href="@{/cadastraros}">Contratar serviço de energia</a></li>
+			<li><a th:href="@{/cadastrarcliente}">Cadastrar cliente</a></li>
+			<li><a th:href="@{/cadastrarinstalador}">Cadastrar instalador</a></li>
+		</ul>
+		
+		<div id="user-bar" sec:authorize="isAuthenticated()">
+			<p>
+				Usuário: 
+				<span th:text="${#authentication.name}">nome</span>
+				<span sec:authorize="hasRole('INSTALADOR')">(instalador)</span>
+				<span sec:authorize="hasRole('ADMIN')">
+					<a th:href="@{/relatorio}">Ver painel de OS's</a>
+				</span>
+			</p>
+			
+			<form th:action="@{/logout}" method="post">
+				<input type="submit" value="Sair do sistema">
+			</form>
+		</div>
+	</body>
+</html>

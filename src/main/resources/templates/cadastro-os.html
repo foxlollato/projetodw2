@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>EOL</title>
+	</head>
+	<body>
+		<h1>Cadastrar OS</h1>
+		
+		<form th:action="@{/cadastraros}" th:object="${endereco}" method="post">
+			<div th:if="${#fields.hasErrors()}">
+				<span class="error">Seu formulário contém erros. Revise e envie novamente.</span>
+			</div>
+			
+			<label for="estado">Estado:</label>
+			<input type="text" name="estado" id="estado" required="required"/>
+			<br/>
+			
+			<label for="cidade">Cidade:</label>
+			<input type="text" name="cidade" id="cidade" required="required"/>
+			<br/>
+			
+			<label for="logradouro">Logradouro:</label>
+			<input type="text" name="logradouro" id="logradouro" required="required"/>
+			<br/>
+			
+			<label for="numero">Número:</label>
+			<input type="text" name="numero" id="numero" required="required"/>
+			<br/>
+			
+			<label for="cep">CEP:</label>
+			<input type="text" name="cep" id="cep" required="required"/>
+			<br/>
+			
+			<label for="plano">Plano:</label>
+			<select name="plano" id="plano" required="required">
+				<option value="monofasico">Monofasico</option>
+				<option value="bifasico">Bifasico</option>
+				<option value="trifasico">Trifasico</option>
+			</select>
+
+			<input type="submit" value="Cadastrar"/>
+			
+			<p><a href="/">Voltar</a></p>
+		</form>		
+	</body>
+</html>
