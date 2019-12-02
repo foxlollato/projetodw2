@@ -12,6 +12,10 @@
 			div#user-bar form {
 				margin-left: 1em;
 			}
+			img {
+				width: 400px;
+				height: 300px;
+			}
 		</style>
 	</head>
 	<body>
@@ -36,8 +40,8 @@
 			</p>
 			
 			<form th:action="@{/logout}" method="post">
-				<input type="submit" value="Sair do sistema">
-			</form>
+				<input type="submit" value="Sair do sistema"/>
+			</form>	
 		</div>
 	</body>
 </html>

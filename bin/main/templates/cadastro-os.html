@@ -7,7 +7,7 @@
 	<body>
 		<h1>Cadastrar OS</h1>
 		
-		<form th:action="@{/cadastraros}" th:object="${endereco}" method="post">
+		<form th:action="@{/cadastraros}" th:object="${os}" method="post">
 			<div th:if="${#fields.hasErrors()}">
 				<span class="error">Seu formulário contém erros. Revise e envie novamente.</span>
 			</div>
@@ -34,9 +34,11 @@
 			
 			<label for="plano">Plano:</label>
 			<select name="plano" id="plano" required="required">
-				<option value="monofasico">Monofasico</option>
+				<option th:each="plano : ${planos}" th:value="${plano}" th:text="${plano}">Plano</option>
+				
+				<!--option value="monofasico">Monofasico</option>
 				<option value="bifasico">Bifasico</option>
-				<option value="trifasico">Trifasico</option>
+				<option value="trifasico">Trifasico</option-->
 			</select>
 
 			<input type="submit" value="Cadastrar"/>
