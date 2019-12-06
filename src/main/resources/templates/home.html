@@ -27,6 +27,7 @@
 			<li><a th:href="@{/cadastraros}">Contratar serviço de energia</a></li>
 			<li><a th:href="@{/cadastrarcliente}">Cadastrar cliente</a></li>
 			<li><a th:href="@{/cadastrarinstalador}">Cadastrar instalador</a></li>
+			<li><a th:href="@{/veros}">Ver painel de OS's</a></li>
 		</ul>
 		
 		<div id="user-bar" sec:authorize="isAuthenticated()">
@@ -35,7 +36,7 @@
 				<span th:text="${#authentication.name}">nome</span>
 				<span sec:authorize="hasRole('INSTALADOR')">(instalador)</span>
 				<span sec:authorize="hasRole('ADMIN')">
-					<a th:href="@{/relatorio}">Ver painel de OS's</a>
+					<a th:href="@{/relatorio}">Relatórios de OS's</a>
 				</span>
 			</p>
 			

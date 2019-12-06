@@ -38,6 +38,14 @@ public class OrdemServico {
 
     private Date execucao;
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+    
     public Date getAbertura() {
         return abertura;
     }
@@ -89,5 +97,5 @@ public class OrdemServico {
 	@PrePersist
 	private void abertura() {
 		abertura = new Date();
-	}
+	}	
 }

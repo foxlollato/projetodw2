@@ -17,7 +17,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService userDetailsService;
 
-
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService);
@@ -36,7 +35,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             		.hasAuthority("ROLE_ADMIN")
             	.antMatchers("/cadastraros")
             		.hasAuthority("ROLE_USER")
-            	.antMatchers("/os", "/os/**")
+            	.antMatchers("/veros", "/veros/**")
+            		.hasAuthority("ROLE_INSTALADOR")
+            	.antMatchers("/api", "/api/**", "/apiExecucao", "/apiExecucao/**")
             		.hasAuthority("ROLE_INSTALADOR")
             	.antMatchers("/", "/**", "/cadastrarcliente", "/cadastrarinstalador")
             		.permitAll()

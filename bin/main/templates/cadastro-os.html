@@ -35,10 +35,6 @@
 			<label for="plano">Plano:</label>
 			<select name="plano" id="plano" required="required">
 				<option th:each="plano : ${planos}" th:value="${plano}" th:text="${plano}">Plano</option>
-				
-				<!--option value="monofasico">Monofasico</option>
-				<option value="bifasico">Bifasico</option>
-				<option value="trifasico">Trifasico</option-->
 			</select>
 
 			<input type="submit" value="Cadastrar"/>

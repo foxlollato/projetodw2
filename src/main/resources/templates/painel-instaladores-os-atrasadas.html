@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>EOL</title>
+	</head>
+	<body>
+		<h1>Instaladores com OS's atrasadas</h1>
+		
+			<table border="1" class="table">
+				<tr>
+					<th width="10px">Instalador</th>
+					<th width="10px">OS's atrasadas</th>
+				</tr>
+				<tr th:each="elemento : ${lista}">
+					<td th:text="${elemento.instalador.nome}" width="10px">Instalador</td>
+					<td th:text="${elemento.tamanhoLista}" width="30px">OS's atrasadas</td>
+				</tr>
+			</table>
+		
+		<p><a href="/relatorio">Voltar</a></p>
+	</body>
+</html>

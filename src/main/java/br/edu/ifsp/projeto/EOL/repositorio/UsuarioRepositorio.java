@@ -1,18 +1,24 @@
 package br.edu.ifsp.projeto.EOL.repositorio;
 
-import br.edu.ifsp.projeto.EOL.model.Usuario;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
-import java.util.List;
+import br.edu.ifsp.projeto.EOL.model.Usuario;
 
 public interface UsuarioRepositorio extends CrudRepository<Usuario, Long> {
 
     Usuario findByUsername(String username);
 
-    @Query(value="SELECT u.nome, p.papel FROM usuario u INNER JOIN papel p ON p.papel = :role", nativeQuery = true)
-    List<Usuario> findAllByRole(String role);
+    @Query(value="SELECT * FROM usuarios u INNER JOIN papeis p ON u.id = p.usuario_id WHERE p.papel = 'ROLE_INSTALADOR'", nativeQuery = true)
+    List<Usuario> findAllInstaladores();
     
-    @Query(value="SELECT u.nome, p.papel FROM usuario u INNER JOIN papel p ON u.id = p.usuario_id", nativeQuery = true)
+    @Query(value="SELECT * FROM usuarios u INNER JOIN papeis p ON u.id = p.usuario_id WHERE p.papel = :role", nativeQuery = true)
+    List<Usuario> findAllByRole(@Param("role")String role);
+    
+    @Query(value="SELECT * FROM usuarios u INNER JOIN papeis p ON u.id = p.usuario_id", nativeQuery = true)
     List<Usuario> findAll();
+
 }

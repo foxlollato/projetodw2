@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+		<meta charset="UTF-8">
+		<title>EOL</title>
+		<style>
+			div#user-bar {
+				display: flex;
+				align-items: baseline;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Painel de OS's do instalador</h1>
+		
+		<ul>
+			<li><a th:href="@{/api/osabertas}">Consultar OS's em aberto</a></li>
+			<li><a th:href="@{/api/osalocadas}">Executar OS's</a></li>
+		</ul>
+		
+		<div id="user-bar" sec:authorize="isAuthenticated()">
+			<p>
+				Usuário: 
+				<span th:text="${#authentication.name}">nome</span>
+				<span sec:authorize="hasRole('INSTALADOR')">(instalador)</span>
+			</p>
+		</div>
+		
+		<p><a href="/">Voltar</a></p>
+	</body>
+</html>

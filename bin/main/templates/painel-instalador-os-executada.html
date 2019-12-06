@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+		<meta charset="UTF-8">
+		<title>EOL</title>
+		<script th:src="@{/scripts/scriptOsExecutadas.js}"></script>
+		<style>
+			div#user-bar {
+				display: flex;
+				align-items: baseline;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>OS's disponíveis para execução</h1>
+		
+		<form method="POST" th:action="@{/executaros}">
+			<table border="1" class="table">
+				<tr>
+					<th width="10px">Abertura</th>
+					<th width="10px">Cliente</th>
+					<th width="10px">Plano</th>
+					<th width="10px">Estado</th>
+					<th width="10px">Cidade</th>
+					<th width="10px">Logradouro</th>
+					<th width="10px">Número</th>
+					<th width="10px">Executar OS</th>
+				</tr>
+				<tr th:each="os : ${oss}">
+					<td th:text="${os.abertura}" width="10px">Abertura</td>
+					<td th:text="${os.cliente.nome}" width="20px">Cliente</td>
+					<td th:text="${os.plano}" width="20px">Plano</td>
+					<td th:text="${os.endereco.estado}" width="60px">Estado</td>
+					<td th:text="${os.endereco.cidade}" width="60px">Cidade</td>
+					<td th:text="${os.endereco.logradouro}" width="90px">Logradouro</td>
+					<td th:text="${os.endereco.numero}" width="70px">Número</td>
+					<td width="60px" class="icon">
+						<button type="submit" th:id="${os.id}" onClick="enviarRequest(this.id)">Executar</button>
+					</td>
+				</tr>
+			</table>
+		</form>
+		
+		<div id="user-bar" sec:authorize="isAuthenticated()">
+			<p>
+				Usuário: 
+				<span th:text="${#authentication.name}">nome</span>
+				<span sec:authorize="hasRole('INSTALADOR')">(instalador)</span>
+			</p>
+		</div>
+		
+		<p><a href="/veros">Voltar</a></p>
+	</body>
+</html>

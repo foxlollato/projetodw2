@@ -1,46 +1,32 @@
 package br.edu.ifsp.projeto.EOL.repositorio;
 
-import br.edu.ifsp.projeto.EOL.model.OrdemServico;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
-
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
+
+import br.edu.ifsp.projeto.EOL.model.OrdemServico;
+
 public interface OrdemServicoRepositorio extends CrudRepository<OrdemServico, Long> {
-    //Lista de OSâ€™s com execuÃ§Ã£o atrasada (o prazo de fechamento Ã© de 5
-    //dias);
-    @Query(value = "SELECT * FROM os WHERE DATEDIFF(abertura, :dataAtual) > 5 and instalador_id is null", nativeQuery = true)
-    List<OrdemServico> findAllExpired(Date dataAtual);
+    
+	//Lista de OS’s com execução atrasada (o prazo de fechamento é de 5 dias)
+    @Query(value = "SELECT * FROM os WHERE DATEDIFF(DATE(execucao), DATE(abertura)) > 5", nativeQuery = true)
+	List<OrdemServico> findAllExpired();
 
-    //Lista de instaladores OSâ€™s atrasadas, organizada por ordem decres-
-    //cente de nÃºmero de OSâ€™s pendentes.
-    @Query(value="SELECT os.id, u.nome " +
-            "FROM os " +
-            "INNER JOIN usuario u" +
-            "ON os.instalador_id=u.id " +
-            "INNER JOIN papeis p "+
-            "ON u.id=p.id "+
-            "WHERE os.instalador is not null" +
-            "AND os.fechamento is not null" +
-            "AND p.papel = 'ROLE_INSTALADOR'", nativeQuery = true)
-    List<OrdemServico> findAllClosed();
+    //OS's fechadas no prazo de um instalador
+    @Query(value="select s.* from os s inner join usuarios u on s.instalador_id = u.id where s.instalador_id = :id and DATEDIFF(DATE(s.execucao), DATE(s.abertura)) <= 5", nativeQuery = true)
+    List<OrdemServico> findAllClosedByInstalador(@Param("id") Long id);
 
-    //Lista de instaladores OSâ€™s atrasadas, organizada por ordem decres-
-    //cente de nÃºmero de OSâ€™s pendentes.
-    @Query(value="SELECT os.id, u.nome " +
-            "FROM os " +
-            "INNER JOIN usuario u" +
-            "ON os.instalador_id=u.id " +
-            "INNER JOIN papeis p "+
-            "ON u.id=p.id "+
-            "WHERE os.instalador is not null" +
-            "AND DATEDIFF(os.abertura, :dataAtual) > 5" +
-            "AND p.papel = 'ROLE_INSTALADOR'", nativeQuery = true)
-    List<OrdemServico> findAllExpiredInstaller(Date dataAtual);
-
+    //Lista de instaladores com OS’s atrasadas, organizada por ordem decrescente de número de OS’s pendentes
+    @Query(value="select * from os s inner join usuarios u on s.instalador_id = u.id where s.instalador_id = :id and DATEDIFF(CURDATE(), DATE(s.abertura)) > 5 and s.execucao is null", nativeQuery = true)
+    List<OrdemServico> findAllExpiredByInstalador(@Param("id") Long id);   
+    
     @Query(value="SELECT * FROM os where instalador_id is null", nativeQuery = true)
     List<OrdemServico> findAllOpen();
-
+	
+    @Query(value="SELECT * FROM os where instalador_id = :id AND execucao is null", nativeQuery = true)
+    List<OrdemServico> findAllOsAbertasByInstalador(@Param("id") Long id);
 
 }
